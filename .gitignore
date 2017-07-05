@@ -1,3 +1,4 @@
+*.pyc
 *.mp3
 downloaded.txt
 songs_media_7tunes.py
