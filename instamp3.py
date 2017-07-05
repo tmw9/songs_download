@@ -25,9 +25,18 @@ def song_page(link, song_name):
     request_obj = requests.get(link)
     plain_code = request_obj.text
     soup_obj = BeautifulSoup(plain_code, "lxml")
+    # print(soup_obj)
     download_link = soup_obj.find('a', {'id': 'dn'})
+    # print(soup_obj.findAll('a'))
     print("Found Download Link")
-    download_song(download_link['href'], song_name)
+    # if download_link is None:
+    #     download_link = download_link1
+    try:
+        download_song(download_link['href'], song_name)
+    except Exception as e:
+        print("Error : " + str(e))
+        print("Cannot Download " + song_name + " because the song was removed")
+        return
 
 
 def search_song(song_name):
