@@ -50,7 +50,8 @@ def search_song(song_name):
     for link in soup_obj.findAll('div', {'class': 'item'}):
         try:
             if 'lyric' in str(link.findNext('img')['alt']).lower() and r'Bitrate: 320 Kbps' in str(link.findNext('em')):
-                print("Found Your Song")
+                print("Found Your Song. Name on net : ")
+                print(str(link.findNext('img')['alt']).lower().title())
                 song_page(link.findNext('a', {'class': 'downnow'})['href'], song_name)
                 return
         except Exception as e:
