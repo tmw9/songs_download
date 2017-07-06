@@ -48,10 +48,17 @@ def search_song(song_name):
     plain_code = request_obj.text
     soup_obj = BeautifulSoup(plain_code, "lxml")
     for link in soup_obj.findAll('div', {'class': 'item'}):
-        if 'lyric' in str(link.findNext('img')['alt']).lower() and r'Bitrate: 320 Kbps' in str(link.findNext('em')):
+        try:
+            if 'lyric' in str(link.findNext('img')['alt']).lower() and r'Bitrate: 320 Kbps' in str(link.findNext('em')):
+                print("Found Your Song")
+                song_page(link.findNext('a', {'class': 'downnow'})['href'], song_name)
+                return
+        except Exception as e:
+            pass
+        if r'Bitrate: 320 Kbps' in str(link.findNext('em')):
             print("Found Your Song")
             song_page(link.findNext('a', {'class': 'downnow'})['href'], song_name)
-            break
+            return
 
 
 def main():
