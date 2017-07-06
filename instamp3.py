@@ -58,6 +58,7 @@ def search_song(song_name):
             pass
         if r'Bitrate: 320 Kbps' in str(link.findNext('em')):
             print("Found Your Song")
+            print(str(link.findNext('img')['alt']).lower().title())
             song_page(link.findNext('a', {'class': 'downnow'})['href'], song_name)
             return
 
